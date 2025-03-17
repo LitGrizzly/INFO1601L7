@@ -30,7 +30,7 @@
     }
 
     nav {
-      background-color: rgb(5, 141, 245);
+      background-color: blueviolet;
       flex-grow: 1;
     }
 
@@ -56,13 +56,13 @@
       width: 120px;
       border-radius: 10px;
       color: white;
-      background-color: rgb(42, 182, 119);
+      background-color: blueviolet;
     }
 
     button:hover {
       background-color: white;
       color: blueviolet;
-      text-decoration: 1px solid rgb(0, 145, 255);
+      text-decoration: 1px solid blueviolet;
     }
 
     button:disabled {
@@ -133,7 +133,7 @@
 
 <body>
   <nav>
-    <h1>Rick and Morty</h1>
+    <h1>Poke Gallery</h1>
 
   </nav>
   <main>
@@ -184,7 +184,7 @@
     let result = document.querySelector('#result');
     for (let rec of data) {
       html += `<div class="card">
-        <img style="height:100px; width:100px" src="https://rickandmortyapi.com/api/character/avatar/${rec.id}.jpeg" alt="Avatar" style="width:100%">
+        <img style="height:100px; width:100px" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${rec.id}.png" alt="Avatar" style="width:100%">
         <p>Name: ${rec.name}</p>
         <button onclick="addFavourite(${rec.id})">Add to Favourites</button>
     </div>`;
@@ -202,11 +202,7 @@
     for (let rec of favourites) {
       html += `
       <div class="item">
-        <h1>Character: ${rec.name}</h1>
-        <p>Status: ${rec.status}</p> 
-          <p>Species: ${rec.species}</p> 
-          <p>Gender: ${rec.gender}</p>
-          <p>Origin: ${rec.origin.name}</p>
+        <p>Pokemon: ${rec.name}</p>
         <button onclick="removeFavourite(${rec.id})">Remove</button>
       </div>
       `;
@@ -217,12 +213,12 @@
   async function getDetails(offset) {
 
     curIndex += offset;
-    let end = curIndex + 7;
+    let end = curIndex + 8;
     let item, response;
     data = [];
     showLoading();
     for (let i = curIndex; i < end; i++) {
-      response = await fetch(`https://rickandmortyapi.com/api/character/${i}`);
+      response = await fetch(`https://pokedextr.beuwi.app/pokemon/${i}`);
       item = await response.json();
       data.push(item);
     }
